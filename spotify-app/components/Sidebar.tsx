@@ -2,7 +2,7 @@ import React from "react"
 import NextImage from "next/image";
 import NextLink from "next/link"
 import { Box, List, ListItem, ListIcon, Divider, Center, LinkBox, LinkOverlay } from "@chakra-ui/layout";
-import { MdHome, MdSearch, MdLibaryMusic, MdPlayListAdd, MdFavorite } from "react-icons/md"
+import { MdHome, MdSearch, MdLibraryMusic, MdPlaylistAdd, MdFavorite } from "react-icons/md"
 
 const navMenu = [
     {
@@ -17,7 +17,7 @@ const navMenu = [
     },
     {
         name: "Your Libary",
-        icon: MdLibaryMusic,
+        icon: MdLibraryMusic,
         route: '/libary'
     }
 ]
@@ -25,7 +25,7 @@ const navMenu = [
 const musicMenu = [
     {
         name: "Create Playlist",
-        icon: MdPlayListAdd,
+        icon: MdPlaylistAdd,
         route: '/'
     },
     {
@@ -35,7 +35,7 @@ const musicMenu = [
     }
 ]
 
-const playlists = new Array(30).fill(1).map((_,i)=>`Playlist ${i+1}`)
+const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
 
 const Sidebar = () => {
     return (
@@ -100,24 +100,22 @@ const Sidebar = () => {
                     </List>
                 </Box>
                 <Divider color="gray.800" />
-<Box height="66%" overflowY="auto" paddingY="20px">
-<List spacing={2} >
-    { 
-        playlists.map(playlist=>(
-            <ListItem paddingX="20px" key={playlist} >
-                <NextLink href="/">
-                    <LinkOverlay>
-                    {playlist}
-                    </LinkOverlay>
+                <Box height="66%" overflowY="auto" paddingY="20px">
+                    <List spacing={2} >
+                        {
+                            playlists.map(playlist => (
+                                <ListItem paddingX="20px" key={playlist} >
+                                    <NextLink href="/">
+                                        <LinkOverlay>
+                                            {playlist}
+                                        </LinkOverlay>
+                                    </NextLink>
+                                </ListItem>
+                            ))
+                        }
+                    </List>
 
-                </NextLink>
-
-            </ListItem>
-        ))
-    }
-</List>
-
-</Box>
+                </Box>
             </Box>
         </Box>
     )
