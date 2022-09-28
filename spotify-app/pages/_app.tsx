@@ -20,7 +20,7 @@ const theme = extendTheme({
   components: {
     Button: {
       variants: {
-        link : {
+        link: {
           ':focus': {
             outline: 'none',
             boxShadow: 'none',
@@ -33,9 +33,14 @@ const theme = extendTheme({
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <ChakraProvider  theme={theme}>
-      <PlayerLayout children={undefined} />
-      <Component {...pageProps} />
+    <ChakraProvider theme={theme}>
+      {
+        Component.authPage ? (
+          <Component {...pageProps} />
+        ) : <PlayerLayout>
+          <Component {...pageProps} />
+        </PlayerLayout>
+      }
     </ChakraProvider>
   )
 }
