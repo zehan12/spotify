@@ -6,7 +6,8 @@ import prisma from '../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync()
-  const { firstName, lastName, email, password } = req.body
+  console.log(req.body)
+  const { firstName, lastName, email, password } = JSON.parse(req.body);
 
   let user
 
@@ -19,6 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         password: bcrypt.hashSync(password, salt),
       },
     })
+
   } catch (e) {
     res.status(401)
     res.json({ error: 'User already exists' })
@@ -37,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.setHeader(
     'Set-Cookie',
-    cookie.serialize('TRAX_ACCESS_TOKEN', token, {
+    cookie.serialize('SPOTIFY_ACCESS_TOKEN', token, {
       httpOnly: true,
       maxAge: 8 * 60 * 60,
       path: '/',
