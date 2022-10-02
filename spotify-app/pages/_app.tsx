@@ -1,6 +1,7 @@
 import React from 'react'
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import "reset-css"
+import "../styles/login.css"
 import PlayerLayout from '../components/PlayerLayout'
 
 const theme = extendTheme({
