@@ -4,17 +4,24 @@ import styles from '../styles/Home.module.css'
 import prisma from '../lib/prisma'
 import { Flex, Box, Text } from '@chakra-ui/layout'
 import { Image } from '@chakra-ui/react'
+import { useMe } from '../lib/hooks'
 
 const Home = ({ artists }) => {
+
+  const { user, isLoading } = useMe();
+
+  if ( isLoading ) {
+    return null
+  }
+  console.log(user,"ueer------------------")
   return (
     <GradientLayout
       color="purple"
       subtitle="profile"
-      title="Ibrahim Kadri"
-      description="15 public playlist"
+      title={`${user?.firstName} ${user?.lastName}`}
+      description={`${user?.playlistsCount} public playlist`}
       image="https://avatars.githubusercontent.com/u/73664886?v=4"
       roundImage >
-      <div style={{ fontSize: "100px", color: "white" }}>Home Page</div>
       <Box color="white" paddingX="40px">
         <Box marginBottom="40px">
           <Text fontSize="2xl" fontWeight="bold">Top artist this month</Text>
@@ -31,8 +38,6 @@ const Home = ({ artists }) => {
                   <Text fontSize="large">{artist.name}</Text>
                   <Text fontSize="x-small">Artist</Text>
                 </Box>
-                
-                {artist.name}
               </Box>
 
             </Box>
