@@ -14,11 +14,11 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true)
-    console.log(mode, email, password, "auth")
+    // console.log(mode, email, password, "auth")
     const res = await auth(mode, { email, password })
-    console.log(res)
-    // setIsLoading(false)
-    // router.push('/')
+    console.log(res,"res")
+    setIsLoading(false)
+    router.push('/')
   }
 
   return (

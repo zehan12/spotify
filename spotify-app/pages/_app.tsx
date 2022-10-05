@@ -3,6 +3,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import "reset-css"
 import "../styles/login.css"
 import PlayerLayout from '../components/PlayerLayout'
+import { CookiesProvider } from 'react-cookie';
 
 const theme = extendTheme({
   colors: {
@@ -34,6 +35,7 @@ const theme = extendTheme({
 
 const MyApp = ({ Component, pageProps }) => {
   return (
+    <CookiesProvider>
     <ChakraProvider theme={theme}>
       {
         Component.authPage ? (
@@ -43,6 +45,7 @@ const MyApp = ({ Component, pageProps }) => {
         </PlayerLayout>
       }
     </ChakraProvider>
+    </CookiesProvider>
   )
 }
 

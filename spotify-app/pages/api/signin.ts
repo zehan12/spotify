@@ -7,13 +7,9 @@ import prisma from '../../lib/prisma'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { email, password } = JSON.parse(req.body)
-    const newBody = JSON.parse(req.body)
-    console.log("emali",email, req.body, req.body.email, newBody, newBody.email)
     const user = await prisma.user.findUnique({
         where: {email},
     })
-
-    console.log(user,"----------------------------------------")
     if (user && bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign(
             {
@@ -30,13 +26,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.setHeader(
             'Set-Cookie',
             cookie.serialize('SPOTIFY_ACCESS_TOKEN', token, {
-                httpOnly: true,
-                maxAge: 8 * 60 * 60,
-                path: '/',
-                sameSite: 'lax',
-                secure: process.env.NODE_ENV === 'production',
+            //   httpOnly: true,
+              maxAge: 8 * 60 * 60,
+              path: '/',
+            //   sameSite: 'lax',
+              secure: process.env.NODE_ENV === 'production',
             })
-        )
+          )
 
         res.json(user)
     } else {

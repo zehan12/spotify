@@ -1,18 +1,18 @@
-import { NextCookies } from 'next/dist/server/web/spec-extension/cookies'
-import type { NextRequest } from 'next/server'
+import Cookies from "cookies";
 import { NextResponse } from 'next/server'
 const signedinPages = ["/", "playlist", "/libary"]
 
-export default function middleware(req) {
-    console.log("req come", req.nextUrl)
-    if (signedinPages.find((p) => p === req.nextUrl.pathname)) {
-        const token = req.cookies.SPOTIFY_ACCESS_TOKEN
-        console.log(token)
+export default function middleware(req, res) {
 
+    if (signedinPages.find((p) => p === req.nextUrl.pathname)) {
+        console.log("----------------------------------------------------------in Middleware--------------------------------------------------------")
+        console.log(req.headers)
+        const token = req?.headers?.get('cookie')?.split("=")[1]+1;
         if (!token) {
             const url = req.nextUrl.clone()
             url.pathname = '/signin'
             return NextResponse.redirect(url);
         }
     }
+
 }
