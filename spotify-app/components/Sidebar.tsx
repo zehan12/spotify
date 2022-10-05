@@ -41,6 +41,7 @@ const musicMenu = [
 
 const Sidebar = () => {
     const { playlists } = usePlaylist()
+    console.log(playlists,"play")
     return (
         <Box
             width="100%"
@@ -107,7 +108,6 @@ const Sidebar = () => {
                 <Box height="66%" overflowY="auto" paddingY="20px">
                     <List spacing={2} >
                         {
-                            playlists &&
                             playlists.map(playlist => (
                                 <ListItem paddingX="20px" key={playlist.id} >
                                     <NextLink href="/">
