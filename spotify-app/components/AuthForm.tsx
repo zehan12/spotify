@@ -8,6 +8,8 @@ import { auth } from '../lib/mutations'
 const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [ firstName, setFirstName ] = useState('');
+  const [ lastName, setLastName ] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
@@ -15,8 +17,13 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
     e.preventDefault();
     setIsLoading(true)
     // console.log(mode, email, password, "auth")
-    const res = await auth(mode, { email, password })
-    console.log(res,"res")
+    let res
+    if ( mode === "signin" ) {
+      res = await auth(mode, { email, password })
+    } else {
+      res = await auth(mode, { email, password, firstName, lastName })
+    }
+    console.log(res, "res")
     setIsLoading(false)
     router.push('/')
   }
@@ -44,6 +51,22 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {
+              mode === "signup" ?
+            <>
+              <Input
+                placeholder="firstname"
+                type="text"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <Input
+                placeholder="lastname"
+                type="text"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </> : ""
+
+            }
             <Button
               type="submit"
               bg="green.500"

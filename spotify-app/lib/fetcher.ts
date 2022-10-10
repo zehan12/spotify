@@ -9,7 +9,8 @@ export default function fetcher( url: string, data = undefined ){
     }).then((res)=>{
         console.log(res.status,"sta")
         if ( res.status > 399 || res.status < 200 ) {
-            throw new Error()
+            // throw new Error()
+            console.log(res)
         }
         return res.json()
     })

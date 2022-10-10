@@ -108,7 +108,8 @@ const Sidebar = () => {
                 <Box height="66%" overflowY="auto" paddingY="20px">
                     <List spacing={2} >
                         {
-                            playlists.map(playlist => (
+                            playlists.length > 1 ?
+                            playlists?.map(playlist => (
                                 <ListItem paddingX="20px" key={playlist.id} >
                                     <NextLink href="/">
                                         <LinkOverlay>
@@ -116,7 +117,7 @@ const Sidebar = () => {
                                         </LinkOverlay>
                                     </NextLink>
                                 </ListItem>
-                            ))
+                            )) : ""
                         }
                     </List>
 

@@ -16,9 +16,10 @@ const Home = ({ artists }) => {
   console.log(user,"ueer------------------")
   return (
     <GradientLayout
-      color="purple"
+      color="green"
       subtitle="profile"
-      title={`${user?.firstName} ${user?.lastName}`}
+      title="zehan khan"
+      // {`${user?.firstName} ${user?.lastName}`}
       description={`${user?.playlistsCount} public playlist`}
       image="https://avatars.githubusercontent.com/u/73664886?v=4"
       roundImage >
